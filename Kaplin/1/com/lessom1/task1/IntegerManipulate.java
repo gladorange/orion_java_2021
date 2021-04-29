@@ -10,10 +10,10 @@ public class IntegerManipulate {
     private Scanner scan = new Scanner( System.in );
 
     public void runManipulate() {
-        while(this.firstVar == null && this.secondVar == null) {
-            inputFirst();
-            inputSecond();
-        }
+
+        this.inputFirst();
+        this.inputSecond();
+
         this.printCompareResult();
         this.printSum();
     }
