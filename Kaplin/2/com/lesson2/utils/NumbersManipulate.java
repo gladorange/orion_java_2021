@@ -3,6 +3,7 @@ package com.lesson2.utils;
 import java.util.Random;
 
 abstract public class NumbersManipulate {
+    Random rand = new Random();
     public int[] forSearchArray;
 
     public NumbersManipulate(int size, int min, int max) {
@@ -28,13 +29,15 @@ abstract public class NumbersManipulate {
     }
 
     private int generateInt(int min, int max) {
-        Random rand = new Random();
-        System.out.println(max-min);
-        return rand.nextInt(max - min) + min;
+        int bound = max - min;
+        int random = 0;
+        if(bound > 0) {
+            random = rand.nextInt(bound) + min;
+        }
+        return random;
 
     }
     private int generateInt() {
-        Random rand = new Random();
         return rand.nextInt();
 
     }
