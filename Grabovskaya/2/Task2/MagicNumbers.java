@@ -4,13 +4,13 @@ import java.util.Arrays;
 
 public class MagicNumbers
 {
-    private static final int MinRangeValue = -100;
-    private static final int MaxRangeValue = 100;
+    private static final int MIN_RANGE_VALUE = -100;
+    private static final int MAX_RANGE_VALUE = 100;
 
     public static int getRandomNumberOfSomeRange()
     {
-        int minValue = MinRangeValue < 0 ? MinRangeValue - 1 : MinRangeValue;
-        int maxValue = MaxRangeValue > 0 ? MaxRangeValue + 1 : MaxRangeValue;
+        int minValue = MIN_RANGE_VALUE < 0 ? MIN_RANGE_VALUE - 1 : MIN_RANGE_VALUE;
+        int maxValue = MAX_RANGE_VALUE > 0 ? MAX_RANGE_VALUE + 1 : MAX_RANGE_VALUE;
 
         double randomNumber = Math.random();
         return (int) ((minValue * (1.0 - randomNumber)) + (maxValue * randomNumber));
