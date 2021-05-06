@@ -8,7 +8,6 @@ import java.util.Random;
 public class Main {
     /**
      * Метод определяет "магическое" число.
-     * @param number
      * @return Возвращает true,если число "магическое",иначе false.
      */
     public static boolean isMagicNumber(int number){
@@ -21,8 +20,6 @@ public class Main {
 
     /**
      * Метод определяет имеют ли два числа различные знаки.
-     * @param firstNumber
-     * @param secondNumber
      * @return  Возвращает 1,если числа имеют разные знаки.
      * Возвращает -1,если числа имеют разные знаки.
      * Возвращает 0,если одно из чисел равно нулю.
@@ -40,7 +37,6 @@ public class Main {
 
     /**
      * Точка входа в приложение.
-     * @param args
      */
     public static void main(String[] args) {
         Random r = new Random();
