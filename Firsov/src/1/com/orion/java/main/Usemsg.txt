@@ -1,0 +1,14 @@
+#Version: 0.001|02.05.2021
+%C - Compare and sum two numbers.
+%C  [Options] 
+Options:
+  -d		Integer number.
+  -v		Printing debug flag.Default false.
+  -h		Show help.
+Examples:
+%C -d 1 -d 1    
+%C -d +2 -d -1  
+%C -h 
+%C -help
+%C --help
+#endif
