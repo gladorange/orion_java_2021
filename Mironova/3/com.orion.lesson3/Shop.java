@@ -6,15 +6,15 @@ public class Shop {
 
     public static final int FIX_PRICE = 49;
     String name;
-    lesson3.ProductList productList;
-    lesson3.Action action;
+    ProductList productList;
+    Action action;
 
     public Shop(String name, int productQuantity) {
         this.name = name;
-        this.productList = new lesson3.ProductList(productQuantity);
+        this.productList = new ProductList(productQuantity);
     }
 
-    public void setAction(lesson3.Action action){
+    public void setAction(Action action){
         this.action = action;
     }
 
@@ -41,7 +41,7 @@ public class Shop {
         }
     }
 
-    //список ДОСТУПНЫХ товаров
+    //список товаров
     public String[] getItems(){
 
         return this.productList.items;

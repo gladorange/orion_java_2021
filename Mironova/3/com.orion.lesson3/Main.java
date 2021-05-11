@@ -6,34 +6,23 @@ public class Main {
 
     public static void main(String[] args){
 
-        Scanner in = new Scanner(System.in);
-        Action happyHours = new Action("Счастливые часы", Action.Type.DISCOUNT, 6,23,50);
+        Action happyHours = new Action("Счастливые часы", Action.Type.DISCOUNT, 50);
 
         Shop firstShop = new Shop("Магазин у дома", 5);
         firstShop.setAction(happyHours);
+        firstShop.action.setHappyHours(11, 16);
 
         Shop secondShop = new Shop("RAPS", 10);
         secondShop.setAction(happyHours);
+        secondShop.action.setHappyHours(10, 12);
 
         Shop thirdShop = new Shop("Pytak", 50);
         thirdShop.setAction(happyHours);
+        thirdShop.action.setHappyHours(18, 20);
 
-        //make a deal
-        //введите товар для покупки
-        System.out.println("Ознакомтесь с ассортиментом");
-        firstShop.showAssortiment();
-
-        System.out.println("и ведите название выбранного товара: ");
-        String itemName = in.nextLine();
-        System.out.println("Введите время совершений покупки: ");
-        int hour = in.nextInt();
-
-        System.out.println("Наиболее благопрятное время совершения покупки мужду " + firstShop.action.timeStart + " и " + firstShop.action.timeFinish + " часами");
-        while(!firstShop.checkItem(itemName)){
-            System.out.println("Товар не существует или приобретён. выбериет другой товар");
-        }
-
-
+        Deal.makeADeal(firstShop);
+        Deal.makeADeal(secondShop);
+        Deal.makeADeal(thirdShop);
 
     }
 

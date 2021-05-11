@@ -1,9 +1,11 @@
 package com.orion.java.lesson3;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class ProductList {
 

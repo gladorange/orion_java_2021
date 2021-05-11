@@ -12,12 +12,15 @@ public class Action {
     int timeFinish;
     int value;
 
-    public Action(String name, Type type, int timeStart, int timeFinish, int value) {
+    public Action(String name, Type type, int value) {
 
         this.name = name;
-        this.timeStart = timeStart;
-        this.timeFinish = timeFinish;
         this.type = type;
         this.value = value;
+    }
+
+    public void setHappyHours(int timeStart, int timeFinish){
+        this.timeStart = timeStart;
+        this.timeFinish = timeFinish;
     }
 }
