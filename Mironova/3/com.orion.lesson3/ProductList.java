@@ -9,10 +9,13 @@ import java.util.stream.IntStream;
 
 public class ProductList {
 
-    private static List<String> productList = new ArrayList(Arrays.asList("Ложка", "Вилка", "Полотенце", "Кастрюоля", "Сковородка", "Крышка", "Дуршлаг", "Тёрка", "Нож", "Крышка", "Блюдце", "Тёрка", "Доска", "Мяч", "Скакалка", "Кукла", "Медведь", "Юла", "Кубики", "Ручка", "Карандаш", "Ножницы", "Альбом", "Фломастеры", "Скотч", "Линейка", "Тетрадь"));
+    private static List<String> productList = new ArrayList(Arrays.asList("ложка", "вилка", "полотенце", "кастрюоля",
+            "сковородка", "крышка", "дуршлаг", "тёрка", "нож", "крышка", "блюдце", "доска", "мяч",
+            "скакалка", "кукла", "медведь", "юла", "кубики", "ручка", "карандаш", "ножницы", "альбом", "фломастеры",
+            "скотч", "линейка", "тетрадь"));
 
     int productQuantity;
-    String[] items;
+    List<String> items = new ArrayList<>();
     Random rand = new Random();
 
     public ProductList(int productQuantity) {
@@ -21,19 +24,17 @@ public class ProductList {
 
         if (productQuantity > productList.size()) {
 
-            this.items = productList.toArray(new String[productList.size()]);
+            this.items = productList;
             this.productQuantity = productList.size();
 
         } else {
-
-            this.items = new String[productQuantity];
 
             for (int i = 0; i < productQuantity; i++) {
                 do {
                     key = rand.nextInt(productList.size() - 1);
                 }while (Arrays.asList(this.items).contains(productList.get(key)));
 
-                this.items[i] = productList.get(key);
+                this.items.add(i, productList.get(key));
                 productList.remove(key);
 
             }
