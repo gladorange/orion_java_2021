@@ -1,4 +1,4 @@
-package com.orion.java.lesson3;
+package com.orion.lesson3;
 
 public class Action {
 
@@ -17,10 +17,5 @@ public class Action {
         this.name = name;
         this.type = type;
         this.value = value;
-    }
-
-    public void setHappyHours(int timeStart, int timeFinish){
-        this.timeStart = timeStart;
-        this.timeFinish = timeFinish;
     }
 }

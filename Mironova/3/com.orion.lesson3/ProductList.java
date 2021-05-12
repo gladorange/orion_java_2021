@@ -1,11 +1,10 @@
-package com.orion.java.lesson3;
+package com.orion.lesson3;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.IntStream;
 
 public class ProductList {
 
@@ -32,7 +31,7 @@ public class ProductList {
             for (int i = 0; i < productQuantity; i++) {
                 do {
                     key = rand.nextInt(productList.size() - 1);
-                }while (Arrays.asList(this.items).contains(productList.get(key)));
+                } while (Arrays.asList(this.items).contains(productList.get(key)));
 
                 this.items.add(i, productList.get(key));
                 productList.remove(key);

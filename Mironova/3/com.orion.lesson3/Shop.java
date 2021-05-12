@@ -1,4 +1,4 @@
-package com.orion.java.lesson3;
+package com.orion.lesson3;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +20,11 @@ public class Shop {
         this.action = action;
     }
 
+    public void setHappyHours(int timeStart, int timeFinish){
+        this.action.timeStart = timeStart;
+        this.action.timeFinish = timeFinish;
+    }
+
     void showAssortiment(){
 
         for (String item: this.productList.items){
@@ -34,12 +39,7 @@ public class Shop {
 
     public int checkItemPrice(String item, int hour){
 
-        //к одному регистру, если понадобится
-        if(this.checkItem(item.toUpperCase()) != -1){
-            return (hour >= this.action.timeStart && hour <= this.action.timeFinish) ? Math.round(FIX_PRICE/2) : FIX_PRICE;
-        }else{
-            return -1;
-        }
+        return (hour >= this.action.timeStart && hour <= this.action.timeFinish) ? Math.round(FIX_PRICE/2) : FIX_PRICE;
     }
 
     public List<String> getItems(){
@@ -51,8 +51,6 @@ public class Shop {
 
         System.out.println("Вы приобрели " + item + " за " + this.checkItemPrice(item, hour) + "р.");
         this.productList.items.remove(item);
-
-
 
     }
 }

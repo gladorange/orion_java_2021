@@ -1,21 +1,22 @@
-import java.util.Scanner;
+package com.orion.lesson3;
 
 import java.util.Scanner;
 
 public class Deal {
 
-    public static Scanner in = new Scanner(System.in);
-
     public static void makeADeal(Shop shop) {
 
-        System.out.println("Добро пожаловать в" + shop.name);
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Добро пожаловать в " + shop.name);
         System.out.println("Ознакомтесь с ассортиментом");
         shop.showAssortiment();
 
         System.out.println("и ведите название выбранного товара: ");
         String itemName = in.nextLine();
 
-        while (shop.checkItem(itemName) == -1) {
+        //контроль наличия товара, купить повторно проданный товар будет невозможно
+        while (shop.checkItem(itemName.toLowerCase()) == -1) {
             System.out.println("Товар не существует или приобретён. выбериет другой товар");
             itemName = in.nextLine();
         }
@@ -29,8 +30,8 @@ public class Deal {
         }
 
         System.out.println("Наиболее благопрятное время совершения покупки мужду " + shop.action.timeStart + " и " + shop.action.timeFinish + " часами");
+        shop.buyItem(itemName.toLowerCase(), hour);
 
-        shop.buyItem(itemName, hour);
 
     }
 
