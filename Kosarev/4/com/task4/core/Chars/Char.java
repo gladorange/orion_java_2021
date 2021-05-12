@@ -23,7 +23,7 @@ public class Char implements SceneViewable {
     public boolean checkIfDead() {
         if (hp <= 0) {
             scene.del(pos);
-            System.out.printf("%s %s погибает\n", this.getClass().getName(), name);
+            System.out.printf("%s убит\n", name);
             return true;
         }
         return false;
