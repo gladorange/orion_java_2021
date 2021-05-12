@@ -31,7 +31,7 @@ public class ProductList {
             for (int i = 0; i < productQuantity; i++) {
                 do {
                     key = rand.nextInt(productList.size() - 1);
-                } while (Arrays.asList(this.items).contains(productList.get(key)));
+                } while (this.items.indexOf(productList.get(key)) != -1);
 
                 this.items.add(i, productList.get(key));
                 productList.remove(key);
