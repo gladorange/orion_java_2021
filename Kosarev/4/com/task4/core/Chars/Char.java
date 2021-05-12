@@ -5,10 +5,10 @@ import com.task4.core.SceneViewable;
 
 
 public class Char implements SceneViewable {
-    private int hp;
-    private int maxhp;
-    private String name;
-    private Scene scene;
+    protected int hp;
+    protected int maxhp;
+    protected String name;
+    protected Scene scene;
     private int pos;
 
     public Char(Scene scene, int pos, String name, int hp, int maxhp) {
@@ -18,6 +18,29 @@ public class Char implements SceneViewable {
         this.scene = scene;
         this.pos = pos;
         scene.add(this, pos);
+    }
+
+    public boolean checkIfDead() {
+        if (hp <= 0) {
+            scene.del(pos);
+            System.out.printf("%s %s погибает\n", this.getClass().getName(), name);
+            return true;
+        }
+        return false;
+    }
+
+    public int getPos() {
+        return pos;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        if (hp > maxhp)
+            hp = maxhp;
+        this.hp = hp;
     }
 
     @Override
