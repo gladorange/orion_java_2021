@@ -1,43 +1,44 @@
 package com.task4;
 
-import com.task4.core.Chars.Builders.MageBuilder;
-import com.task4.core.Chars.Builders.MonsterBuilder;
-import com.task4.core.Chars.Mage;
-import com.task4.core.Chars.Monster;
-import com.task4.core.Scene.Scene;
+import com.task4.core.Char.Builders.MageBuilder;
+import com.task4.core.Char.Builders.MonsterBuilder;
+import com.task4.core.Char.Mage;
+import com.task4.core.Char.Monster;
+import com.task4.core.Scene;
 
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Scene testScene = new Scene(10);
+        Scene foo = new Scene();
         Monster urukHai = new MonsterBuilder()
-                .setScene(testScene)
-                .setPos(0)
+                .setScene(foo)
+                .setScenePos(foo.nextFreePos())
                 .setName("Uruk-Hai")
-                .setHp(100)
-                .setMaxhp(100)
-                .setDmg(20)
                 .createMonster();
-        Monster boromir = new MonsterBuilder()
-                .setScene(testScene)
-                .setPos(1)
-                .setName("Boromir")
-                .setHp(40)
-                .setMaxhp(100)
-                .setDmg(20)
+        Monster sauron = new MonsterBuilder()
+                .setScene(foo)
+                .setScenePos(foo.nextFreePos())
+                .setName("Sauron")
                 .createMonster();
-        Mage saruman = new MageBuilder()
-                .setScene(testScene)
-                .setPos(2)
-                .setName("Saruman")
-                .setHp(40)
-                .setMaxhp(40)
+        Mage gandalf = new MageBuilder()
+                .setScene(foo)
+                .setScenePos(foo.nextFreePos())
+                .setName("Gandalf")
+                .setSpellbook(List.of("Исцеление", "Цепная молния", "Молния"))
                 .createMage();
-        System.out.println(testScene.toString());
-        urukHai.attack(boromir.getPos());
-        urukHai.attack(boromir.getPos());
-        urukHai.attack(boromir.getPos());
-        testScene.processChars();
-        System.out.println(testScene.toString());
+        System.out.println(foo.sceneView());
+        gandalf.prepareSpell("Исцеление", gandalf).cast();
+        gandalf.prepareSpell("Исцеление", gandalf).cast();
+        sauron.attack(urukHai);
+        sauron.attack(urukHai);
+        sauron.attack(urukHai);
+        gandalf.prepareSpell("Исцеление", urukHai).cast();
+        sauron.attack(urukHai);
+        sauron.attack(urukHai);
+        sauron.attack(urukHai);
+        foo.process();
+
+        System.out.println(foo.sceneView());
     }
 }
