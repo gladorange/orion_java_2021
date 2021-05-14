@@ -1,16 +1,23 @@
-package com.task4.core.Char;
+package com.task4.core.Char.Template;
 
 import com.task4.core.Scene;
 
 
 abstract public class Char {
     private int hp;
+    private static String charClass;
     private String name;
     private Scene scene;
     private int scenePos;
 
+    protected Char() {
+    }
+
     abstract public int getMaxHp();
-    abstract public String toSceneView();
+
+    public String toSceneView() {
+        return getName();
+    }
 
     public boolean checkCanInteractWith(Char target) {
         return scene == target.scene;
@@ -24,13 +31,19 @@ abstract public class Char {
         return true;
     }
 
-    public Char(int hp, String name, Scene scene, int scenePos) {
+    public Char(int hp, String name, Scene scene, int scenePos, String charClass) {
         this.hp = hp;
         this.name = name;
         this.scene = scene;
         this.scenePos = scenePos;
+        Char.charClass = charClass;
         scene.set(this, scenePos);
-        System.out.printf("%s вошел на сцену\n", name);
+        System.out.printf("%s %s вошел на сцену на %d слот\n", charClass, name, scenePos);
+    }
+
+    public void sufferDmg(int dmg) {
+        setHp(hp - dmg);
+        System.out.printf("Здоровье %s: %d\n", name, hp);
     }
 
     public void setHp(int hp) {
@@ -47,5 +60,13 @@ abstract public class Char {
 
     public int getScenePos() {
         return scenePos;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public String getCharClass() {
+        return charClass;
     }
 }

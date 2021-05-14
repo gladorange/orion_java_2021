@@ -2,6 +2,7 @@ package com.task4.core.Char.Builders;
 
 import com.task4.core.Char.Mage;
 import com.task4.core.Scene;
+import com.task4.core.Spell.Spellconsts;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class MageBuilder {
     private String name;
     private Scene scene;
     private int scenePos;
-    private List<String> spellbook;
+    private List<Spellconsts> spellbook;
 
     public MageBuilder setHp(int hp) {
         this.hp = hp;
@@ -32,7 +33,7 @@ public class MageBuilder {
         return this;
     }
 
-    public MageBuilder setSpellbook(List<String> spellbook) {
+    public MageBuilder setSpellbook(List<Spellconsts> spellbook) {
         this.spellbook = spellbook;
         return this;
     }

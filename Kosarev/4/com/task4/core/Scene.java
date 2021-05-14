@@ -1,9 +1,10 @@
 package com.task4.core;
 
-import com.task4.core.Char.Char;
+import com.task4.core.Char.Template.Char;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,6 +19,13 @@ public class Scene {
                 .forEach(Char::checkIfDead);
     }
 
+    public Char findCharByName(String charName) {
+        return Arrays.stream(getChars())
+                .filter(c -> c.getName().equals(charName))
+                .findFirst()
+                .orElse(null);
+    }
+
     public String sceneView() {
         String nullView = "____";
         String sceneStr = "[ ";
@@ -28,11 +36,12 @@ public class Scene {
         return sceneStr;
     }
 
-    public int nextFreePos() {
-        return IntStream.range(0, SCENE_LENGTH)
-                .filter(i -> fields[i] == null)
-                .findFirst()
-                .orElse(-1);
+    public int nextRandomFreePos() {
+        Random random = new Random();
+        int randomPos = random.nextInt(SCENE_LENGTH);
+        while (fields[randomPos] != null)
+            randomPos = random.nextInt(SCENE_LENGTH);
+        return randomPos;
     }
 
     public void set(Char c, int pos) {
@@ -45,5 +54,13 @@ public class Scene {
 
     public void del(Char c) {
         del(c.getScenePos());
+    }
+
+    public Char[] getFields() {
+        return fields;
+    }
+
+    public Char[] getChars() {
+        return Arrays.stream(fields).filter(Objects::nonNull).toArray(Char[]::new);
     }
 }

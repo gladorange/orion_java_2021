@@ -1,7 +1,7 @@
-package com.task4.core.Spell;
+package com.task4.core.Spell.Template;
 
-import com.task4.core.Char.Char;
-import com.task4.core.Char.Spellcasting;
+import com.task4.core.Char.Template.Char;
+import com.task4.core.Char.Template.Spellcasting;
 
 public class Spell {
     private String name;
