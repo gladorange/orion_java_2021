@@ -1,4 +1,4 @@
-package com.orion.java.lesson3;
+package com.orion.lesson3;
 
 public class Action {
 
@@ -12,11 +12,9 @@ public class Action {
     int timeFinish;
     int value;
 
-    public Action(String name, Type type, int timeStart, int timeFinish, int value) {
+    public Action(String name, Type type, int value) {
 
         this.name = name;
-        this.timeStart = timeStart;
-        this.timeFinish = timeFinish;
         this.type = type;
         this.value = value;
     }
