@@ -26,6 +26,15 @@ public class FinalizeExample {
         System.out.println(вася.name);
         вася = null;
         System.gc();
+
+
+        final long start = System.currentTimeMillis();
+
+        while (System.currentTimeMillis() - start < 1000) {
+
+        }
+
+
         System.out.println("Конец программы");
 
 
