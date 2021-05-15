@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class task1 {
+public class Test {
     public static void main(String[] args) {
 
         int luckyHour = 0;
