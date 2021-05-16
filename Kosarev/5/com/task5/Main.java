@@ -10,7 +10,7 @@ import com.task5.core.UIScene;
 public class Main {
     public static void main(String[] args) throws UIInvalidSizeException, UIElementOverlapException {
         UIScene testScene = new UIScene(100, 20);
-        UIElement bigButton = new Button(2, 2, 20, 7, "Big Button", false, () -> System.out.println("Callback from bigButton"));
+        UIElement bigButton = new Button(1, 1, 30, 7, "Big Button", false, () -> System.out.println("Callback from bigButton"));
         UIElement smallButton = new Button(25, 6, 15, 4, "Small Button", false, () -> System.out.println("Callback from smallButton"));
         testScene.addElement(bigButton);
         testScene.addElement(smallButton);

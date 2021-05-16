@@ -25,10 +25,6 @@ public class UIScene {
     private List<UIElement> elements;
 
     public void render() {
-//        for (UIElement element : elements) {
-//            System.out.println(element.toUISceneView().replaceAll("%endl%", "\n"));
-//        }
-
         // Upper border
         int typenameStartX = (int) Math.floor( (width - TYPE_NAME.length())/2 );
         String sceneView = UL_CORNER_CHAR + HOR_BORDER_CHAR.repeat(typenameStartX - 1) + TYPE_NAME + HOR_BORDER_CHAR.repeat(typenameStartX - 1);
@@ -37,7 +33,6 @@ public class UIScene {
         sceneView += UR_CORNER_CHAR + ENDL_CHAR;
 
         // Body
-        // TODO: body
         for (int y = 1; y < height; y++) {
             String ystr = VER_BORDER_CHAR;
             int finalY = y;
@@ -47,10 +42,9 @@ public class UIScene {
                             finalY < e.getY() + e.getHeight() ))
                     .sorted(Comparator.comparing(UIElement::getX))
                     .collect(Collectors.toList());
-            for (UIElement e : elementsOnCurrentY) {
+            for (UIElement e : elementsOnCurrentY)
                 ystr += SPACE_CHAR.repeat(e.getX() - ystr.length())
                         + e.toUISceneView().split(UIElement.getEndlChar())[y - e.getY()];
-            }
             ystr += SPACE_CHAR.repeat(width - ystr.length() - 1);
             ystr += VER_BORDER_CHAR + ENDL_CHAR;
             sceneView += ystr;
@@ -104,7 +98,7 @@ public class UIScene {
 
         boolean overlapping = false;
         for (UIElement element : elements) {
-            overlapping &= isElementsOverlapping(e, element);
+            overlapping = isElementsOverlapping(e, element);
             if (overlapping)
                 return true;
         }

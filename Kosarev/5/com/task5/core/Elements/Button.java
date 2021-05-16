@@ -56,6 +56,6 @@ public class Button extends UIElement implements Clickable {
 
     @Override
     public String toString() {
-        return String.format("Button(x:%d, y:%d, w:%d, h:%d)", getX(), getY(), getWidth(), getHeight());
+        return String.format("Button \"%s\"(x:%d, y:%d, w:%d, h:%d)", getName(), getX(), getY(), getWidth(), getHeight());
     }
 }

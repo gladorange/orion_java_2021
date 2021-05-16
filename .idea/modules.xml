@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/orion_java_2021.iml" filepath="$PROJECT_DIR$/orion_java_2021.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_LECTIONS/1/1.iml" filepath="$PROJECT_DIR$/_LECTIONS/1/1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mironova/1/11.iml" filepath="$PROJECT_DIR$/Mironova/1/11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_LECTIONS/2/2.iml" filepath="$PROJECT_DIR$/_LECTIONS/2/2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mironova/2/21.iml" filepath="$PROJECT_DIR$/Mironova/2/21.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Kosarev/2/22.iml" filepath="$PROJECT_DIR$/Kosarev/2/22.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_LECTIONS/3/3.iml" filepath="$PROJECT_DIR$/_LECTIONS/3/3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mironova/3/31.iml" filepath="$PROJECT_DIR$/Mironova/3/31.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_LECTIONS/4/4.iml" filepath="$PROJECT_DIR$/_LECTIONS/4/4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_LECTIONS/5/5.iml" filepath="$PROJECT_DIR$/_LECTIONS/5/5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Andreev/Andreev.iml" filepath="$PROJECT_DIR$/Andreev/Andreev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Firsov/Firsov.iml" filepath="$PROJECT_DIR$/Firsov/Firsov.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Gladkov/Gladkov.iml" filepath="$PROJECT_DIR$/Gladkov/Gladkov.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Grabovskaya/Grabovskaya.iml" filepath="$PROJECT_DIR$/Grabovskaya/Grabovskaya.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Kaplin/Kaplin.iml" filepath="$PROJECT_DIR$/Kaplin/Kaplin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Kosarev/Kosarev.iml" filepath="$PROJECT_DIR$/Kosarev/Kosarev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SAVINOV/SAVINOV.iml" filepath="$PROJECT_DIR$/SAVINOV/SAVINOV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Sharafeev/Sharafeev.iml" filepath="$PROJECT_DIR$/Sharafeev/Sharafeev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/orion_java_2021.iml" filepath="$PROJECT_DIR$/.idea/orion_java_2021.iml" />
     </modules>
   </component>
 </project>
