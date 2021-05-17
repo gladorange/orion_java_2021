@@ -4,7 +4,6 @@ import com.task5.core.Elements.Templates.UIElement;
 import com.task5.core.Exceptions.UIInvalidSizeException;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 public class TextField extends UIElement {
     private static final String TYPE_NAME       = "TextField";
@@ -42,7 +41,7 @@ public class TextField extends UIElement {
         String spaceFiller = isDisabled() ? DISABLED_CHAR : SPACE_CHAR;
         String view = "";
         // Upper border
-        int typenameStartX = (int) Math.ceil( (getWidth() - getTypeName().length())/2 );
+        int typenameStartX = (int) Math.ceil( (getWidth() - getTypeName().length() - getName().length())/2 );
         view += UL_CORNER_CHAR +
                 HOR_BORDER_CHAR.repeat(Math.max(typenameStartX - 1, 0)) +
                 getName().substring(0, Math.min(getWidth()-4, getName().length())) +

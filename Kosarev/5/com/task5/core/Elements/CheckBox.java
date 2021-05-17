@@ -69,8 +69,6 @@ public class CheckBox extends UIElement implements Clickable {
                 HOR_BORDER_CHAR.repeat(Math.max(typenameStartX - 1, 0)) +
                 getTypeName().substring(0, Math.max(Math.min(getWidth()-4, getTypeName().length()), 1)) +
                 HOR_BORDER_CHAR.repeat(Math.max(typenameStartX - 1, 0));
-//        if (view.length() != getWidth() - 1)
-//            view += HOR_BORDER_CHAR;
         if (view.length() < getWidth() - 1)
             view += HOR_BORDER_CHAR.repeat(getWidth() - 1 - view.length());
         view += UR_CORNER_CHAR + ENDL_CHAR;
@@ -78,12 +76,13 @@ public class CheckBox extends UIElement implements Clickable {
         // Body
         int noBordersWidth = getWidth() - 2;
         String viewableText = String.format("%s %s", square, getName())
-                .substring(0, Math.min(Math.max(noBordersWidth, 1), getName().length()));
-        int textStartX = (int) Math.ceil( (getWidth() - getName().length())/2 );
+                .substring(0, Math.min(Math.max(noBordersWidth, 1), getName().length() + 2));
+        int textStartX = (int) Math.ceil( (getWidth() - viewableText.length())/2 );
         int textStartY = Math.round(getHeight()/2);
         for (int y = 1; y < getHeight() - 1; y++) {
             if (y == textStartY) {
-                String s = VER_BORDER_CHAR + spaceFiller.repeat(Math.max(textStartX - 1, 0)) + viewableText + spaceFiller.repeat(Math.max(textStartX - 1, 0));
+                String s = VER_BORDER_CHAR + spaceFiller.repeat(Math.max(textStartX - 1, 0)) + viewableText
+                        + spaceFiller.repeat(Math.max(textStartX - 1, 0));
                 if (s.length() != getWidth() - 1)
                     s += spaceFiller;
                 view += s + VER_BORDER_CHAR + ENDL_CHAR;

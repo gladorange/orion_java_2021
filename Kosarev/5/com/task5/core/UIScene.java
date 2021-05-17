@@ -44,11 +44,13 @@ public class UIScene {
                     .collect(Collectors.toList());
             for (UIElement e : elementsOnCurrentY) {
                 // TODO: на левой границе окна элементы отрисовываются некорректно (x:0)
-                // TODO: на правой границе окна элемент может вытеснить границу окна
                 int reqStrIndex = y - e.getY();
-                ystr += SPACE_CHAR.repeat(Math.max(e.getX() - ystr.length(), 0))
-                        + e.toUISceneView()
-                        .split(UIElement.getEndlChar())[reqStrIndex];
+                String viewableElement = e.toUISceneView().split(UIElement.getEndlChar())[reqStrIndex];
+                ystr += SPACE_CHAR.repeat(Math.max(e.getX() - ystr.length(), 0)) +
+                        viewableElement.substring(
+                                Math.max(0, 1-e.getX()),
+                                Math.min(viewableElement.length(), width - e.getX() - 1)
+                        );
             }
             ystr += SPACE_CHAR.repeat(Math.max(width - ystr.length() - 1, 0));
             ystr += VER_BORDER_CHAR + ENDL_CHAR;
@@ -65,7 +67,7 @@ public class UIScene {
         if (!overlappingElements.isEmpty())
             throw new UIElementOverlapException("Element " + newElement.toString() + " is overlapping with " +
                     overlappingElements.stream()
-                            .map(e -> e.toString())
+                            .map(UIElement::toString)
                             .collect(Collectors.joining()));
         elements.add(newElement);
     }

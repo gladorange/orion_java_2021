@@ -15,46 +15,41 @@ import java.util.Random;
 
 public class Main {
     private static final int UISCENE_WIDTH                    = 100;
-    private static final int UISCENE_HEIGHT                   = 30;
+    private static final int UISCENE_HEIGHT                   = 100;
     private static final int ADD_ELEMENT_BUTTON_WIDTH         = 20;
     private static final int ADD_ELEMENT_BUTTON_HEIGHT        = 3;
     private static final int NEXT_XY_TEXT_FIELD_WIDTH         = 14;
     private static final int NEXT_XY_TEXT_FIELD_HEIGHT        = 3;
 
     private static final int ELEMENT_MIN_WIDTH  = 8;
-    private static final int ELEMENT_MAX_WIDTH  = 30;
-    private static final int ELEMENT_MIN_HEIGHT = 3;
-    private static final int ELEMENT_MAX_HEIGHT = 15;
+    private static final int ELEMENT_MAX_WIDTH  = 64;
+    private static final int ELEMENT_MIN_HEIGHT = 5;
+    private static final int ELEMENT_MAX_HEIGHT = 24;
 
     public static UIElement getRandomElement(int x, int y, int width, int height, boolean isDisabled) throws UIInvalidSizeException {
         Random random = new Random();
         boolean chboxStateOn = random.nextBoolean();
-        int elementPick = random.nextInt(2);
+        int elementPick = random.nextInt(3);
         UIElement randomElement;
         switch (elementPick) {
-            case 0: {
-                randomElement = new Button(x, y, width, height, String.format("Кнопка в <%d; %d>", x, y), isDisabled,
-                        () -> System.out.printf("Нажата кнопка в <%d; %d> с названием \"%s\"\n", x, y, String.format("Кнопка в <%d; %d>", x, y)));
-                break;
-            }
-            case 1: {
+            case 0 -> randomElement = new Button(x, y, width, height, String.format("Кнопка в <%d; %d>", x, y), isDisabled,
+                    () -> System.out.printf("Нажата кнопка в <%d; %d> с названием \"%s\"\n", x, y, String.format("Кнопка в <%d; %d>", x, y)));
+            case 1 -> {
                 randomElement = new CheckBox(x, y, width, height, String.format("Галка в <%d; %d>", x, y), isDisabled, chboxStateOn);
-                ((Clickable)randomElement).setClickCallback(() -> System.out.println(
+                ((Clickable) randomElement).setClickCallback(() -> System.out.println(
                         randomElement.getTypeName() + " \"" + randomElement.getName() + "\" теперь " +
-                                (((CheckBox)randomElement).isDisabled() ? "ВЫКЛ" : "ВКЛ") ));
-                break;
+                                (randomElement.isDisabled() ? "ВЫКЛ" : "ВКЛ")));
             }
-            case 2: {
-                randomElement = new TextField(x, y, width, height, String.format("ТекстПоле в <%d; %d>", x, y), isDisabled,
-                        "Содержимое текстового поля\nТекст текст текст");
-                break;
-            }
-            default: throw new IllegalStateException("Unexpected value in switch" + elementPick);
+            case 2 -> randomElement = new TextField(x, y, width, height, String.format("ТекстПоле в <%d; %d>", x, y), isDisabled,
+                    "Содержимое текстового поля\nТекст текст текст");
+            default -> throw new IllegalStateException("Unexpected value in switch" + elementPick);
         }
+        System.out.printf("Создаю случайный %s (x: %d; y: %d; w: %d; h: %d; %s)%n",
+                randomElement.getTypeName(), randomElement.getX(), randomElement.getY(), randomElement.getWidth(), randomElement.getHeight(), randomElement.isDisabled() ? "disabled" : "enabled");
         return randomElement;
     }
 
-    public static void main(String[] args) throws UIInvalidSizeException, UIElementOverlapException, IOException {
+    public static void main(String[] args) throws UIInvalidSizeException, UIElementOverlapException {
         Random random = new Random();
 
         UIScene testScene = new UIScene(UISCENE_WIDTH, UISCENE_HEIGHT);
@@ -69,7 +64,7 @@ public class Main {
         UIElement nextHeightTextfield = new TextField(1, nextWidthTextfield.getY() + nextWidthTextfield.getHeight(),
                 NEXT_XY_TEXT_FIELD_WIDTH, NEXT_XY_TEXT_FIELD_HEIGHT, "След. Высота", "");
         CheckBox nextIsDisabled = new CheckBox(1, nextHeightTextfield.getY() + nextHeightTextfield.getHeight(),
-                NEXT_XY_TEXT_FIELD_WIDTH, NEXT_XY_TEXT_FIELD_HEIGHT, "След. выкл?", false, false);
+                NEXT_XY_TEXT_FIELD_WIDTH, NEXT_XY_TEXT_FIELD_HEIGHT, "След. выкл", false, false);
         ((Clickable) nextIsDisabled).setClickCallback( () -> System.out.println(
                 nextIsDisabled.getTypeName() +
                 " \"" + nextIsDisabled.getName() + "\" теперь " +
@@ -89,14 +84,11 @@ public class Main {
             int nextHeight = random.nextInt(ELEMENT_MAX_HEIGHT - ELEMENT_MIN_HEIGHT) + ELEMENT_MIN_HEIGHT;
             boolean isDisabled = random.nextBoolean();
             ((Button)addNewElementButton).setClickCallback( () -> {
-                    System.out.println(String.format("Создаю случайный элемент (x: %d; y: %d; w: %d; h: %d; %s)", nextX, nextY, nextWidth, nextHeight, isDisabled ? "disabled" : "enabled"));
-                UIElement randElement = null;
+                UIElement randElement;
                 try {
                     randElement = getRandomElement(nextX, nextY, nextWidth, nextHeight, isDisabled);
                     testScene.addElement(randElement);
-                } catch (UIInvalidSizeException e) {
-                    e.printStackTrace();
-                } catch (UIElementOverlapException e) {
+                } catch (UIInvalidSizeException | UIElementOverlapException e) {
                     e.printStackTrace();
                 }
 
@@ -123,7 +115,7 @@ public class Main {
         testScene.render();
 
         System.out.println("Список элементов:");
-        testScene.getElements().stream().forEach(e -> System.out.println("  - " + e.toString()));
+        testScene.getElements().forEach(e -> System.out.println("  - " + e.toString()));
         System.out.println("\nПрокликивание доступных элементов: ");
         testScene.getElements().stream()
                 .filter(e -> e instanceof Clickable)
