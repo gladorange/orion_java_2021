@@ -13,6 +13,7 @@ public abstract class UIElement {
 
     protected static final String ENDL_CHAR = "%endl%";
     public abstract String toUISceneView();
+    // TODO: change typename from String to enum
     public abstract String getTypeName();
 
     public UIElement(int x, int y, int width, int height, String name, boolean disabled) throws UIInvalidSizeException {
@@ -90,7 +91,7 @@ public abstract class UIElement {
 
     @Override
     public String toString() {
-        return String.format("%s в координатах <%d, %d>, ширина %d, высота %d. Название: %s",
-                             getTypeName(), x, y,  width, height, name);
+        return String.format("%s в координатах <%d, %d>, ширина %d, высота %d. Название: \"%s\" %s",
+                             getTypeName(), x, y,  width, height, name, disabled ? "(выключен)" : "");
     }
 }

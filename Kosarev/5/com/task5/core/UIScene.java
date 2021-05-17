@@ -33,7 +33,7 @@ public class UIScene {
         sceneView += UR_CORNER_CHAR + ENDL_CHAR;
 
         // Body
-        for (int y = 1; y < height; y++) {
+        for (int y = 1; y < height-1; y++) {
             String ystr = VER_BORDER_CHAR;
             int finalY = y;
             List<UIElement> elementsOnCurrentY = elements.stream()
@@ -43,10 +43,12 @@ public class UIScene {
                     .sorted(Comparator.comparing(UIElement::getX))
                     .collect(Collectors.toList());
             for (UIElement e : elementsOnCurrentY) {
-                // TODO: на границе окна элементы отрисовываются некорректно (x:0; y:0)
+                // TODO: на левой границе окна элементы отрисовываются некорректно (x:0)
+                // TODO: на правой границе окна элемент может вытеснить границу окна
+                int reqStrIndex = y - e.getY();
                 ystr += SPACE_CHAR.repeat(Math.max(e.getX() - ystr.length(), 0))
                         + e.toUISceneView()
-                        .split(UIElement.getEndlChar())[y - e.getY()];
+                        .split(UIElement.getEndlChar())[reqStrIndex];
             }
             ystr += SPACE_CHAR.repeat(Math.max(width - ystr.length() - 1, 0));
             ystr += VER_BORDER_CHAR + ENDL_CHAR;
@@ -59,8 +61,12 @@ public class UIScene {
     }
 
     public void addElement(UIElement newElement) throws UIElementOverlapException {
-        if (isElementsOverlapping(newElement, elements))
-            throw new UIElementOverlapException("Element " + newElement.toString() + " is overlapping someone");  // - не очень хорошо, т.к. не знаем точно с кем пересекается newElement
+        var overlappingElements = getElementsOverlapping(newElement, elements);
+        if (!overlappingElements.isEmpty())
+            throw new UIElementOverlapException("Element " + newElement.toString() + " is overlapping with " +
+                    overlappingElements.stream()
+                            .map(e -> e.toString())
+                            .collect(Collectors.joining()));
         elements.add(newElement);
     }
 
@@ -70,6 +76,10 @@ public class UIScene {
 
     public List<UIElement> getElements() {
         return elements;
+    }
+
+    public void clear() {
+        elements.clear();
     }
 
     public UIScene() throws UIInvalidSizeException {
@@ -88,21 +98,23 @@ public class UIScene {
         return widthOrHeight <= 0;
     }
 
-    private boolean isElementsOverlapping(UIElement e1, UIElement e2) {
+    public boolean isElementsOverlapping(UIElement e1, UIElement e2) {
         return !(e1.getX() >= e2.getX()+e2.getWidth() ||
                  e2.getX() >= e1.getX()+e1.getWidth() ||
                  e1.getY() >= e2.getY()+e2.getHeight() ||
                  e2.getY() >= e1.getY()+e1.getHeight());
     }
 
-    private boolean isElementsOverlapping(UIElement e, List<UIElement> elements) {
+    public List<UIElement> getElementsOverlapping(UIElement e, List<UIElement> elements) {
+        // Либо надо было делать метод статичным, либо избавляться от второго параметра
         if (elements.isEmpty())
-            return false;
+            return elements;
 
+        List<UIElement> overlapping = new ArrayList<>();
         for (UIElement element : elements) {
             if (isElementsOverlapping(e, element))
-                return true;
+                overlapping.add(element);
         }
-        return false;
+        return overlapping;
     }
 }
