@@ -1,4 +1,4 @@
-package com.task5.core.Elements;
+package com.task5.core.Elements.Templates;
 
 
 public interface ClickCallback {

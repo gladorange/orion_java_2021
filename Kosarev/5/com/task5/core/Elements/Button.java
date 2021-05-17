@@ -1,6 +1,10 @@
 package com.task5.core.Elements;
 
+import com.task5.core.Elements.Templates.ClickCallback;
+import com.task5.core.Elements.Templates.Clickable;
+import com.task5.core.Elements.Templates.UIElement;
 import com.task5.core.Exceptions.UIInvalidSizeException;
+import com.task5.core.Exceptions.UIReadOnlyException;
 
 public class Button extends UIElement implements Clickable {
     private static final String TYPE_NAME       = "Button";
@@ -8,6 +12,7 @@ public class Button extends UIElement implements Clickable {
     private static final String HOR_BORDER_CHAR = "-";
     private static final String VER_BORDER_CHAR = "|";
     private static final String SPACE_CHAR      = " ";
+    private static final String DISABLED_CHAR   = ":";
 
     private ClickCallback clickCallback;
 
@@ -16,10 +21,22 @@ public class Button extends UIElement implements Clickable {
         this.clickCallback = clickCallback;
     }
 
+    public Button(int x, int y, int width, int height, String name, ClickCallback clickCallback) throws UIInvalidSizeException {
+        super(x, y, width, height, name);
+        this.clickCallback = clickCallback;
+    }
+
+    @Override
+    public void click() throws UIReadOnlyException {
+        if (isDisabled())
+            throw new UIReadOnlyException(this);
+    }
+
     @Override
     public String toUISceneView() {
+        String spaceFiller = isDisabled() ? DISABLED_CHAR : SPACE_CHAR;
         // Upper border
-        int typenameStartX = (int) Math.floor( (getWidth() - getTypeName().length())/2 );
+        int typenameStartX = (int) Math.ceil( (getWidth() - getTypeName().length())/2 );
         String view = CORNER_CHAR + HOR_BORDER_CHAR.repeat(typenameStartX - 1) + getTypeName() + HOR_BORDER_CHAR.repeat(typenameStartX - 1);
         if (view.length() != getWidth() - 1)
             view += HOR_BORDER_CHAR;
@@ -27,16 +44,16 @@ public class Button extends UIElement implements Clickable {
 
         // Body
         int spacesAmount = getWidth() - 2;
-        int nameStartX = (int) Math.floor( (getWidth() - getName().length())/2 );
+        int nameStartX = (int) Math.ceil( (getWidth() - getName().length())/2 );
         int nameStartY = Math.round(getHeight()/2);
         for (int y = 1; y < getHeight() - 1; y++) {
             if (y == nameStartY) {
-                String s = VER_BORDER_CHAR + SPACE_CHAR.repeat(nameStartX - 1) + getName() + SPACE_CHAR.repeat(nameStartX - 1);
+                String s = VER_BORDER_CHAR + spaceFiller.repeat(Math.max(nameStartX - 1, 0)) + getName() + spaceFiller.repeat(Math.max(nameStartX - 1, 0));
                 if (s.length() != getWidth() - 1)
-                    s += SPACE_CHAR;
+                    s += spaceFiller;
                 view += s + VER_BORDER_CHAR + ENDL_CHAR;
             } else
-                view += VER_BORDER_CHAR + SPACE_CHAR.repeat(spacesAmount) + VER_BORDER_CHAR + ENDL_CHAR;
+                view += VER_BORDER_CHAR + spaceFiller.repeat(spacesAmount) + VER_BORDER_CHAR + ENDL_CHAR;
         }
 
         // Bottom border
@@ -54,8 +71,4 @@ public class Button extends UIElement implements Clickable {
         return TYPE_NAME;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Button \"%s\"(x:%d, y:%d, w:%d, h:%d)", getName(), getX(), getY(), getWidth(), getHeight());
-    }
 }

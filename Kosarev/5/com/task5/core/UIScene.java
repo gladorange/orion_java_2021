@@ -1,6 +1,6 @@
 package com.task5.core;
 
-import com.task5.core.Elements.UIElement;
+import com.task5.core.Elements.Templates.UIElement;
 import com.task5.core.Exceptions.UIElementOverlapException;
 import com.task5.core.Exceptions.UIInvalidSizeException;
 
@@ -42,10 +42,13 @@ public class UIScene {
                             finalY < e.getY() + e.getHeight() ))
                     .sorted(Comparator.comparing(UIElement::getX))
                     .collect(Collectors.toList());
-            for (UIElement e : elementsOnCurrentY)
-                ystr += SPACE_CHAR.repeat(e.getX() - ystr.length())
-                        + e.toUISceneView().split(UIElement.getEndlChar())[y - e.getY()];
-            ystr += SPACE_CHAR.repeat(width - ystr.length() - 1);
+            for (UIElement e : elementsOnCurrentY) {
+                // TODO: на границе окна элементы отрисовываются некорректно (x:0; y:0)
+                ystr += SPACE_CHAR.repeat(Math.max(e.getX() - ystr.length(), 0))
+                        + e.toUISceneView()
+                        .split(UIElement.getEndlChar())[y - e.getY()];
+            }
+            ystr += SPACE_CHAR.repeat(Math.max(width - ystr.length() - 1, 0));
             ystr += VER_BORDER_CHAR + ENDL_CHAR;
             sceneView += ystr;
         }
@@ -86,20 +89,18 @@ public class UIScene {
     }
 
     private boolean isElementsOverlapping(UIElement e1, UIElement e2) {
-        return e1.getX() + e1.getWidth() >= e2.getX() ||
-                e1.getY() + e1.getHeight() >= e2.getY() ||
-                e2.getX() + e2.getWidth() >= e1.getX() ||
-                e2.getY() + e2.getHeight() >= e1.getY();
+        return !(e1.getX() >= e2.getX()+e2.getWidth() ||
+                 e2.getX() >= e1.getX()+e1.getWidth() ||
+                 e1.getY() >= e2.getY()+e2.getHeight() ||
+                 e2.getY() >= e1.getY()+e1.getHeight());
     }
 
     private boolean isElementsOverlapping(UIElement e, List<UIElement> elements) {
         if (elements.isEmpty())
             return false;
 
-        boolean overlapping = false;
         for (UIElement element : elements) {
-            overlapping = isElementsOverlapping(e, element);
-            if (overlapping)
+            if (isElementsOverlapping(e, element))
                 return true;
         }
         return false;

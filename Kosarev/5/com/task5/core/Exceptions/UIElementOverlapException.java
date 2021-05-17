@@ -1,6 +1,6 @@
 package com.task5.core.Exceptions;
 
-import com.task5.core.Elements.UIElement;
+import com.task5.core.Elements.Templates.UIElement;
 
 
 public class UIElementOverlapException extends Exception {

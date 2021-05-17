@@ -1,4 +1,4 @@
-package com.task5.core.Elements;
+package com.task5.core.Elements.Templates;
 
 import com.task5.core.Exceptions.UIInvalidSizeException;
 
@@ -22,6 +22,10 @@ public abstract class UIElement {
         setHeight(height);
         this.name = name;
         this.disabled = disabled;
+    }
+
+    public UIElement(int x, int y, int width, int height, String name) throws UIInvalidSizeException {
+        this(x, y, width, height, name, false);
     }
 
     private boolean isSizeInvalid(int widthOrHeight) {
@@ -82,5 +86,11 @@ public abstract class UIElement {
 
     public static String getEndlChar() {
         return ENDL_CHAR;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s в координатах <%d, %d>, ширина %d, высота %d. Название: %s",
+                             getTypeName(), x, y,  width, height, name);
     }
 }
