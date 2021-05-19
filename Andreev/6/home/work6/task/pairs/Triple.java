@@ -39,7 +39,12 @@ public class Triple <T1,T2 extends Comparable<T2>,T3> implements Comparable<Trip
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((firstParametr == null) ? 0 : firstParametr.hashCode());
+        result = prime * result + ((secondParametr == null) ? 0 : secondParametr.hashCode());
+        result = prime * result + ((thirdParametr == null) ? 0 : thirdParametr.hashCode());
+        return result;
     }
 
     @Override

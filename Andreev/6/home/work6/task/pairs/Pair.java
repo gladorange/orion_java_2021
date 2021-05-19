@@ -33,7 +33,11 @@ public class Pair<T1,T2> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        final int prime = 24;
+        int result = 1;
+        result = prime * result + ((firstParametr == null) ? 0 : firstParametr.hashCode());
+        result = prime * result + ((secondParametr == null) ? 0 : secondParametr.hashCode());
+        return result;
     }
 
 }
