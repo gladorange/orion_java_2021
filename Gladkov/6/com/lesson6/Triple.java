@@ -3,8 +3,8 @@ package com.lesson6;
 import java.util.Objects;
 
 public class Triple<T1,T2,T3> {
-    private static long ID = 0;
-    private long id;
+    private static int ID = 0;
+    private int id;
     private T1 field1;
     private T2 field2;
     private T3 field3;
@@ -14,7 +14,7 @@ public class Triple<T1,T2,T3> {
         field1 = var1;
         field2 = var2;
         field3 = var3;
-        this.id = ( ID += 1L );
+        this.id = ID++;
     }
 
 
@@ -44,6 +44,12 @@ public class Triple<T1,T2,T3> {
 
     @Override
     public int hashCode() {
-        return Objects.hash( id );
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        result = prime * result + ((field1 == null) ? 0 : field1.hashCode());
+        result = prime * result + ((field2 == null) ? 0 : field2.hashCode());
+        result = prime * result + ((field3 == null) ? 0 : field3.hashCode());
+        return result;
     }
 }

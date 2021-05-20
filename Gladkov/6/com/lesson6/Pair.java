@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Pair <T1,T2> {
 
-    private static long ID = 0;
-    private long id;
+    private static int ID = 0;
+    private int id;
     private T1 field1;
     private T2 field2;
 
@@ -13,7 +13,7 @@ public class Pair <T1,T2> {
     public Pair( T1 var1, T2 var2 ) {
         field1 = var1;
         field2 = var2;
-        this.id = ( ID += 1L );
+        this.id = ID++;
     }
 
 
@@ -38,6 +38,11 @@ public class Pair <T1,T2> {
 
     @Override
     public int hashCode() {
-        return Objects.hash( id );
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        result = prime * result + ((field1 == null) ? 0 : field1.hashCode());
+        result = prime * result + ((field2 == null) ? 0 : field2.hashCode());
+        return result;
     }
 }

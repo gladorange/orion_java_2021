@@ -47,7 +47,7 @@ public class AppMain {
                 new Triple<>( "НТК", GasolineType.DT, 47.2 )
         ));
 
-        GasStation.findBestPrice( gasStationList, GasolineType.DT );
+        GasStation.findBestPrice( gasStationList, GasolineType.AI_95 );
 
         System.out.println( "Список приложений на телефон............" );
 
