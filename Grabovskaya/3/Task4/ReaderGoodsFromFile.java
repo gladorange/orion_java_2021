@@ -8,11 +8,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadGoodsFromFile
+public class ReaderGoodsFromFile
 {
-    private List<String> goods;
+    private static List<String> goods;
 
-    public ReadGoodsFromFile()
+    static List<String> readGoodsFromFile()
     {
         goods = new ArrayList<>();
         String filePath = "Grabovskaya\\3\\GoodsCatalog";
@@ -30,10 +30,7 @@ public class ReadGoodsFromFile
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
-    public List<String> getGoods()
-    {
         return goods;
     }
 }

@@ -68,8 +68,7 @@ public class FixPriceShop
 
     public static void main(String[] args)
     {
-        ReadGoodsFromFile goodsFromFile = new ReadGoodsFromFile();
-        List<String> goods = goodsFromFile.getGoods();
+        List<String> goods = ReaderGoodsFromFile.readGoodsFromFile();
         if (goods.isEmpty())
         {
             System.out.println("Список товаров пуст!");
