@@ -4,12 +4,12 @@ import com.lesson7.Box;
 
 import java.util.Objects;
 
-public class NumberBox<T extends Number> {
-    private static Number value;
+public class NumberBox<T extends Number> extends Box {
+    private Number value;
 
 
     private NumberBox( T value ){
-        NumberBox.value = Objects.requireNonNull( value );
+        this.value = Objects.requireNonNull( value );
     }
 
 
@@ -17,15 +17,15 @@ public class NumberBox<T extends Number> {
         return new NumberBox<T>( value );
     }
 
-    public static NumberBox add( Box<? extends Number> anotherBox ){
+    public NumberBox add( Box<? extends Number> anotherBox ){
         return NumberBox.of((anotherBox.get()).longValue() + value.longValue());
     }
 
-    public static  NumberBox multiply( Box<? extends Number> anotherBox ){
+    public NumberBox multiply( Box<? extends Number> anotherBox ){
         return NumberBox.of((anotherBox.get()).longValue() * value.longValue());
     }
 
-    public static Number get() {
+    public Number get() {
         return value;
     }
 }

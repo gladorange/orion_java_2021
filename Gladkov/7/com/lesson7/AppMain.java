@@ -9,10 +9,14 @@ import java.util.List;
 public class AppMain {
     public static void main(String[] args) {
         System.out.println(" /**********Задача с цифрами*******************/ ");
-        Box<Integer> firstBox = Box.of(2);
+        Box<Integer> firstBox = Box.of(1);
         Box<Long> secondBox = Box.of(2L);
-        NumberBox third = NumberBox.of(2);
+        NumberBox third = NumberBox.of(3);
         System.out.println( third.add(secondBox).multiply(firstBox).get() );
+        NumberBox one = NumberBox.of(1);
+        NumberBox another = NumberBox.of(2);
+        System.out.println(one.add(another).get());
+
 
         System.out.println(" /**********Задача с буквами*******************/ ");
         List<CharSequence> emptyList = new ArrayList<>();
