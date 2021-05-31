@@ -18,7 +18,7 @@ public class NumberBox<T extends Number> extends Box {
     }
 
     public NumberBox add( Box<? extends Number> anotherBox ){
-        return NumberBox.of((anotherBox.get()).longValue() + value.longValue());
+        return NumberBox.of((anotherBox.get()).longValue() + value.longValue() );
     }
 
     public NumberBox multiply( Box<? extends Number> anotherBox ){

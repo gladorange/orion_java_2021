@@ -22,7 +22,7 @@ public class AppMain {
         List<CharSequence> emptyList = new ArrayList<>();
         StringBoxUtils.copyNonEmptyStringBoxToList( Box.of("    "), emptyList);
         StringBoxUtils.copyNonEmptyStringBoxToList(Box.of("сорок два"), emptyList);
-        StringBoxUtils.copyNonEmptyStringBoxToList(Box.of(new StringBuilder("some value ")), emptyList);
+        StringBoxUtils.copyNonEmptyStringBoxToList(Box.of(new StringBuilder("some value ")), emptyList );
         System.out.println( emptyList );
 
         System.out.println( StringBoxUtils.join(Box.of("One "),Box.of("Two "),Box.of("Three")).get() );

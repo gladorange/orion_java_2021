@@ -10,7 +10,7 @@ public class Box<T> {
        this.value = Objects.requireNonNull( value );
     }
 
-    public Box() {
+    public Box( ) {
     }
 
     public static <T> Box<T> of(T value ) {
