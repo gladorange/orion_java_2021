@@ -62,14 +62,5 @@ public class Main {
                     }
 
                 });
-
-        for (Element element : scene.getAllElements()) {
-            element.getDescription();
-            if (element instanceof Clickable) {
-                ((Clickable) element).click();
-            } else {
-                ((TextField) element).getText();
-            }
-        }
     }
 }
