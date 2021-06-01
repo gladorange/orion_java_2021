@@ -1,33 +1,39 @@
 package home.work7.boxnumber;
 
-public class NumberBox<T extends Number> {
-    private T value;
+public class NumberBox<T extends Number> extends Box{
 
     public NumberBox(T value) {
-        this.value = value;
-    }
-
-    public T getValue() {
-        return value;
+        super(value);
     }
 
     public NumberBox<Number> multiply(Box anotherBox) {
 
-        CalcHelper calcHelper = new CalcHelper();
+        if (anotherBox.getValue() instanceof Number) {
 
-        calcHelper.calc(value, anotherBox);
+            CalcHelper calcHelper = new CalcHelper();
 
-        return new NumberBox<>((calcHelper.thisValueF + calcHelper.thisValueL) * (calcHelper.anotherValueF + calcHelper.anotherValueL));
+            calcHelper.calc((Number) this.getValue(), anotherBox);
+
+            return new NumberBox<>((calcHelper.thisValueF + calcHelper.thisValueL) * (calcHelper.anotherValueF + calcHelper.anotherValueL));
+        }
+
+        throw new IllegalArgumentException("Переменная не является наследником Number");
+
     }
 
 
     public NumberBox<Number> addition(Box anotherBox) {
 
-        CalcHelper calcHelper = new CalcHelper();
+        if (anotherBox.getValue() instanceof Number) {
 
-        calcHelper.calc(value, anotherBox);
+            CalcHelper calcHelper = new CalcHelper();
 
-        return new NumberBox<>((calcHelper.thisValueF + calcHelper.thisValueL) + (calcHelper.anotherValueF + calcHelper.anotherValueL));
+            calcHelper.calc((Number) this.getValue(), anotherBox);
+
+            return new NumberBox<>((calcHelper.thisValueF + calcHelper.thisValueL) + (calcHelper.anotherValueF + calcHelper.anotherValueL));
+        }else {
+            throw new IllegalArgumentException("Переменная не является наследником Number");
+        }
 
     }
 

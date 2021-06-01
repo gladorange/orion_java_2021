@@ -1,6 +1,9 @@
 package home.work7.boxstring;
 
 
+import home.work7.boxnumber.Box;
+
+import java.util.Collection;
 import java.util.List;
 
 public class StringBoxUtils {
@@ -21,9 +24,9 @@ public class StringBoxUtils {
         return new Box<>(sb);
     }
 
-    public static void copyNonEmptyStringBoxToList(Box<CharSequence> box, List<CharSequence> list){
+    public static void copyNonEmptyStringBoxToList(Box<CharSequence> box, Collection list){
         if (box.getValue().toString().trim().length()!=0){
-            list.add(box.getValue().toString());
+            list.add(box.getValue());
         }
     }
 

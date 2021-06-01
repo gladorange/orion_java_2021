@@ -1,5 +1,7 @@
 package home.work7.boxstring;
 
+import home.work7.boxnumber.Box;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ public class Main {
         StringBoxUtils.copyNonEmptyStringBoxToList(box1, emptyList);
         StringBoxUtils.copyNonEmptyStringBoxToList(box2, emptyList);
         StringBoxUtils.copyNonEmptyStringBoxToList(box3, emptyList);
+        StringBoxUtils.copyNonEmptyStringBoxToList(new Box<>("string"), new ArrayList<String>());
         System.out.println(emptyList);
 
         System.out.println(StringBoxUtils.join(box1,box2,box3).getValue().toString().trim());

@@ -3,7 +3,7 @@ package home.work7.boxnumber;
 public class Main {
 
     public static void main(String[] args) {
-        Box<Double> firstBox = new Box<>(2.8);
+        Box<String> firstBox = new Box<>("2.8");
         Box<Long> secondBox = new Box<>(2L);
         NumberBox third = new NumberBox(2);
         NumberBox result = third.addition(firstBox).multiply(secondBox);
