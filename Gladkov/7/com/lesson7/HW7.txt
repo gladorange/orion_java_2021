@@ -30,12 +30,8 @@
  1. метод join, который на вход принимает несколько(vararg или List) коробочек с любым наследником CharSequence
  и возвращает единственную коробочку, которая содержит в себе объединенную строку.
  2. метод copyNonEmptyStringBoxToList, который на вход принимает коробочку со строкой и List куда он запишет содержимое коробочки,
- если это содержимое не пустое (в строке есть символы, отличные от пробела).
-
- Если строка в коробочке содержит только пробелы - то метод не делает ничего.
-
+ если это содержимое не пустое (в строке есть символы, отличные от пробела). Если строка в коробочке содержит только пробелы - то метод не делает ничего.
  Например:
-
  List<CharSequence> emptyList = new ArrayList<>();
  copyNonEmptyStringBoxToList(Box<String>.of("    "), emptyList); // пустая строка не должна добавиться
  copyNonEmptyStringBoxToList(Box<String>.of("сорок два"), emptyList); // теперь внутри emptyList лежит "сорок два"
@@ -44,12 +40,4 @@
  Обратите внимание, что если бы emptyList содержал не CharSequence, а просто String, то последний пример с StringBUilder вызвал бы ошибку компиляции.
 
 
- List<String> stringList = new ArrayList<>();
- copyNonEmptyStringBoxToList(Box<String>.of("    "), stringList); // пустая строка не должна добавиться
- copyNonEmptyStringBoxToList(Box<String>.of("сорок два"), stringList); // теперь внутри stringList лежит "сорок два"
- copyNonEmptyStringBoxToList(Box<StringBuilder>.of(new StringBuilder("some value ")), stringList); // ошибка компиляции, нельзя добавлять StringBuilder в список со строками
-
-
-
  Создайте несколько коробочек со строками и объедините их
-
