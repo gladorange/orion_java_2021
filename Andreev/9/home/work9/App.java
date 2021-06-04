@@ -1,9 +1,6 @@
 package home.work9;
 
-import java.io.BufferedInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.Collections;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -110,7 +107,11 @@ public class App {
     }
 
     private void writeToSequentialFile() throws IOException {
-        try (FileWriter fileWriter = new FileWriter("C:\\Users\\1\\Documents\\sequential.txt")) {
+        File file = new File("C:\\sequential.txt");
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        try (FileWriter fileWriter = new FileWriter(file)) {
             for (TextData el : listInfo) {
                 fileWriter.write(el.getData().toString());
             }
@@ -119,7 +120,11 @@ public class App {
 
     private void writeToParallelFile() throws IOException {
         Collections.sort(listInfo);
-        try (FileWriter fileWriter = new FileWriter("C:\\Users\\1\\Documents\\parallel.txt")) {
+        File file = new File("C:\\parallel.txt");
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        try (FileWriter fileWriter = new FileWriter(file)) {
             for (TextData el : listInfo) {
                 fileWriter.write(el.getData().toString());
             }
