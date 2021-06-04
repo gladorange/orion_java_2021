@@ -29,6 +29,7 @@ public class Main {
                                           "https://www.microsoft.com/ru-ru",
                                           "https://www.google.com/");
         System.out.println();
+        System.out.println();
 
         System.out.println("List of URLs:\n    - " + String.join("\n    - ", listOfURLs));
 
