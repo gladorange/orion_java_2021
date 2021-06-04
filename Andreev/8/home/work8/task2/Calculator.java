@@ -9,10 +9,12 @@ public class Calculator {
 
     public void calculate(String operationName, Double number1, Double number2){
 
-        for (Map.Entry<String,Operation> el : operations.entrySet()){
-            if (el.getKey().equals(operationName)){
-                System.out.println(el.getValue().doOperation(number1,number2));
-            }
+        Operation operation = operations.get(operationName);
+
+        if (operation!=null){
+            operations.get(operationName).doOperation(number1,number2);
+        }else{
+            throw new IllegalArgumentException("Операции " + operationName + " не существует!");
         }
     }
 
