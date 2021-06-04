@@ -20,19 +20,27 @@ public class Main
         System.out.println("Результат 2: " + sixth.add(fifthBox).multiply(fourthBox).getElement());
 
         List<Box<? extends CharSequence>> boxes = new ArrayList<>();
-        boxes.add(new Box<String>("Куз"));
-        boxes.add(new StringBoxUtils<String>("не"));
-        boxes.add(new StringBoxUtils<StringBuilder>(new StringBuilder("чик")));
+        boxes.add(new Box<>("Куз"));
+        boxes.add(new StringBoxUtils<>("не"));
+        boxes.add(new StringBoxUtils<>(new StringBuilder("чик")));
 
         System.out.println("Результат склеивания: " + StringBoxUtils.join(boxes).getElement());
 
         System.out.println("Добавление не пустых строк в лист:");
         List<CharSequence> emptyList = new ArrayList<>();
-        StringBoxUtils.copyNonEmptyStringBoxToList(new Box<String>("    "), emptyList);
+        StringBoxUtils.copyNonEmptyStringBoxToList(new Box<>("    "), emptyList);
         System.out.println(emptyList);
-        StringBoxUtils.copyNonEmptyStringBoxToList(new Box<String>("сорок два"), emptyList);
+        StringBoxUtils.copyNonEmptyStringBoxToList(new Box<>("сорок два"), emptyList);
         System.out.println(emptyList);
-        StringBoxUtils.copyNonEmptyStringBoxToList(new Box<StringBuilder>(new StringBuilder("some value ")), emptyList);
+        StringBoxUtils.copyNonEmptyStringBoxToList(new Box<>(new StringBuilder("some value ")), emptyList);
         System.out.println(emptyList);
+
+        List<String> stringList = new ArrayList<>();
+        StringBoxUtils.copyNonEmptyStringBoxToList(new Box<>("    "), stringList);
+        System.out.println(stringList);
+        StringBoxUtils.copyNonEmptyStringBoxToList(new Box<>("сорок два"), stringList);
+        System.out.println(stringList);
+        StringBoxUtils.copyNonEmptyStringBoxToList(new Box<>(new StringBuilder("some value ")), stringList);
+        System.out.println(stringList);
     }
 }

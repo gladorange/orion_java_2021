@@ -3,8 +3,6 @@ package Task6;
 public class Button extends Rectangle implements Rectangle.Clickable
 {
     private ButtonClickCallback callback;
-    private int coordinateXForNewElement = 0;
-    private int coordinateYForNewElement = 0;
 
     public Button(String caption, int x, int y, int height, int width, ButtonClickCallback callback)
     {
@@ -24,19 +22,9 @@ public class Button extends Rectangle implements Rectangle.Clickable
         return callback;
     }
 
-    public void setCoordinateXForNewElement(int coordinateXForNewElement)
-    {
-        this.coordinateXForNewElement = coordinateXForNewElement;
-    }
-
-    public void setCoordinateYForNewElement(int coordinateYForNewElement)
-    {
-        this.coordinateYForNewElement = coordinateYForNewElement;
-    }
-
     public interface ButtonClickCallback
     {
-        void onButtonClick(int x, int y);
+        void onButtonClick();
     }
 
     @Override
@@ -44,7 +32,7 @@ public class Button extends Rectangle implements Rectangle.Clickable
     {
         if (state)
         {
-            callback.onButtonClick(coordinateXForNewElement, coordinateYForNewElement);
+            callback.onButtonClick();
         }
         else
         {

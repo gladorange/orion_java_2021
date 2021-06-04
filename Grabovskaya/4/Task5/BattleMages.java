@@ -20,8 +20,11 @@ public class BattleMages
         names.add("Борис");
 
         final int numberOfPositions = 10; // количество позиций на сцене
-        List<Integer> positions = List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-        positions = new ArrayList<Integer>(positions);
+        List<Integer> positions = new ArrayList<>();
+        for (int i = 0; i < numberOfPositions; i++)
+        {
+            positions.add(i);
+        }
 
         Random random = new Random();
         final int numberOfDifferentCharacters = 2;
@@ -57,14 +60,10 @@ public class BattleMages
                     .filter(character -> currentCharacter != character)
                     .collect(Collectors.toList()));
 
-            sceneWithCharacters.removeIf(character -> {
-                if (character.getCurrentHealth() < 0)
-                {
-                    System.out.println("\n" + character.getName() + " убит. Количество оставшихся персонажей: " + sceneWithCharacters.size());
-                    return true;
-                }
-                return false;
-            });
+            if (sceneWithCharacters.removeIf(character -> character.getCurrentHealth() < 0))
+            {
+                System.out.println("Количество оставшихся персонажей: " + sceneWithCharacters.size());
+            }
         }
         System.out.println("Игра закончена.");
     }

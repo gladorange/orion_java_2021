@@ -19,7 +19,7 @@ public class StringBoxUtils <T> extends Box <T>
         return new StringBoxUtils<>(str.toString());
     }
 
-    public static void copyNonEmptyStringBoxToList(Box<? extends CharSequence> boxWithStr, List<CharSequence> sequenceList)
+    public static void copyNonEmptyStringBoxToList(Box<? extends CharSequence> boxWithStr, List<? super String> sequenceList)
     {
         String str = boxWithStr.getElement().toString().trim();
         if (!str.isEmpty())

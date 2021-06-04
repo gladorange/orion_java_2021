@@ -62,7 +62,12 @@ public abstract class Character
     public void reduceHealth(int score)
     {
         currentHealth -= score;
+
         System.out.printf("Текущее здоровье (%s, %d): %d.\n", name, position, currentHealth);
+        if (currentHealth < 0)
+        {
+            System.out.println(name + " убит.");
+        }
     }
 
     public void addHealth(int score)
