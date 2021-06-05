@@ -30,6 +30,7 @@ public class ParallelUnsortedDownloader extends ParallelSortedDownloader {
                 SequentialDownloader s = new SequentialDownloader(getTmpContainerName(url));
                 Boolean res = s.writeAllSites(List.of(url)).get(url);
                 urlToTmpFileMap.put(url, s.getContainer());
+                addDownloadedBytes(s.getDownloadedBytes());
                 return res;
             } ));
         }

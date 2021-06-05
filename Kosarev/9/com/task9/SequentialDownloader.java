@@ -12,9 +12,11 @@ import java.util.Map;
 public class SequentialDownloader implements Downloader {
 
     private final File container;
+    private long downloadedBytes;
 
     public SequentialDownloader(String containerName) {
         this.container = createContainer(containerName);
+        this.downloadedBytes = 0;
     }
 
     @Override
@@ -41,6 +43,16 @@ public class SequentialDownloader implements Downloader {
     @Override
     public File getContainer() {
         return container;
+    }
+
+    @Override
+    public void addDownloadedBytes(long b) {
+        downloadedBytes += b;
+    }
+
+    @Override
+    public long getDownloadedBytes() {
+        return downloadedBytes;
     }
 
 }

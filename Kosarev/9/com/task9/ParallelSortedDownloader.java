@@ -11,9 +11,11 @@ public class ParallelSortedDownloader implements Downloader {
     protected static final File NO_FILE    = new File("");
     protected static final int BUFFER_SIZE = 8_000;
     private final File container;
+    private long downloadedBytes;
 
     public ParallelSortedDownloader(String containerName) {
         this.container = createContainer(containerName);
+        this.downloadedBytes = 0;
     }
 
     protected String getTmpContainerName(String url) {
@@ -33,6 +35,7 @@ public class ParallelSortedDownloader implements Downloader {
                 SequentialDownloader s = new SequentialDownloader(getTmpContainerName(url));
                 Boolean res = s.writeAllSites(List.of(url)).get(url);
                 urlToTmpFileMap.put(url, s.getContainer());
+                addDownloadedBytes(s.getDownloadedBytes());
                 return res;
             } ));
         }
@@ -59,5 +62,15 @@ public class ParallelSortedDownloader implements Downloader {
     @Override
     public File getContainer() {
         return container;
+    }
+
+    @Override
+    public void addDownloadedBytes(long b) {
+        downloadedBytes += b;
+    }
+
+    @Override
+    public long getDownloadedBytes() {
+        return downloadedBytes;
     }
 }
