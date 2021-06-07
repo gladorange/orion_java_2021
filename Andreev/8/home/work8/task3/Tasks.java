@@ -57,7 +57,6 @@ public class Tasks {
 
     private void taskTwo(List<Student> students) {
         System.out.println("2. Выведите статистику посещений для каждого студентам в формате: имя - количество посщенных лекций.");
-        System.out.println("2. Выведите статистику посещений для каждого студентам в формате: имя - количество посщенных лекций.");
         students.forEach(el ->{
             System.out.println(el.getName() + " = " + el.getLections().size());
         });
