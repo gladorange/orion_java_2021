@@ -14,8 +14,6 @@ public class UIMain
         TextField coordinateY = new TextField("Координата y для нового элемента", 21, 11, 5, 20, 20);
         scene.addElement(coordinateX);
         scene.addElement(coordinateY);
-        addButton.setCoordinateXForNewElement(coordinateX.getCoordinate());
-        addButton.setCoordinateYForNewElement(coordinateY.getCoordinate());
         try {
             addButton.click();
         } catch (Rectangle.ReadOnlyException e)
@@ -27,10 +25,8 @@ public class UIMain
         System.out.println("--------------Добавление элементов--------------");
         for (int i = 0; i < 10; i++)
         {
-            coordinateX.setCoordinate(random.nextInt(UI.MAX_WIDTH));
-            coordinateY.setCoordinate(random.nextInt(UI.MAX_HEIGHT));
-            addButton.setCoordinateXForNewElement(coordinateX.getCoordinate());
-            addButton.setCoordinateYForNewElement(coordinateY.getCoordinate());
+            coordinateX.setCoordinate(random.nextInt(UI.MAX_WIDTH / 2));
+            coordinateY.setCoordinate(random.nextInt(UI.MAX_HEIGHT / 2));
             try {
                 addButton.click();
             } catch (Rectangle.ReadOnlyException e)

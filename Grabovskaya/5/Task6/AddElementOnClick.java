@@ -11,8 +11,11 @@ public class AddElementOnClick implements Button.ButtonClickCallback
         scene = sceneToAddElements;
     }
 
-    private Rectangle generateRandomElement(int x, int y)
+    private Rectangle generateRandomElement()
     {
+        int x = ((TextField)scene.getAllElements().get(1)).getCoordinate();
+        int y = ((TextField)scene.getAllElements().get(2)).getCoordinate();
+
         Rectangle newElement = null;
         final int numberDifferentRec = 3;
         switch (new Random().nextInt(numberDifferentRec))
@@ -31,25 +34,19 @@ public class AddElementOnClick implements Button.ButtonClickCallback
     }
 
     @Override
-    public void onButtonClick(int x, int y)
+    public void onButtonClick()
     {
-        Rectangle toAdd = generateRandomElement(x, y);
-        try {
-            scene.checkIntersection(toAdd);
-            scene.addElement(toAdd);
-            System.out.println("Добавлен элемент " + toAdd);
-        } catch (UI.ElementsOverlapException | UI.ElementsOutOfScene e)
-        {
-            System.out.println(e.getMessage());
-        }
+        Rectangle toAdd = generateRandomElement();
+        scene.addElement(toAdd);
+        System.out.println("Добавлен элемент " + toAdd);
     }
 }
 
 class DoNothingOnClick implements Button.ButtonClickCallback
 {
     @Override
-    public void onButtonClick(int x, int y)
+    public void onButtonClick()
     {
-        System.out.printf("Нажата кнопка в <%d,%d>, она ничего не создает.\n", x, y);
+        System.out.println("Нажата кнопка, которая ничего не создает");
     }
 }

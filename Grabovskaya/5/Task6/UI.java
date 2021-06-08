@@ -43,7 +43,13 @@ public class UI
 
     public void addElement(Rectangle element)
     {
-        elements.add(element);
+        try {
+            checkIntersection(element);
+            elements.add(element);
+        } catch (UI.ElementsOverlapException | UI.ElementsOutOfScene e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static class ElementsOverlapException extends Exception
