@@ -3,7 +3,9 @@ package com.orion.lesson10;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Box<T> {
     T value;
