@@ -1,18 +1,30 @@
-package home.work10.classes;
+package homework10.classes;
 
-import homework10.annotation.Annotation;
 
-@Annotation.XmlTypeName("Человек")
+import homework10.annotation.SecretField;
+import homework10.annotation.XmlName;
+import homework10.annotation.XmlTypeName;
+
+@XmlTypeName("Человек")
 public class Person {
 
-    @Annotation.XmlName("Имя")
-    String firstName="Vasya";
+    @XmlName("Имя")
+    String firstName;
 
-    @Annotation.XmlName("Возраст")
-    double age=12;
+    @XmlName("Возраст")
+    double age;
 
-    @Annotation.SecretField
+    @SecretField
     String password;
+
+    public Person() {
+    }
+
+    public Person(String firstName, double age, String password) {
+        this.firstName = firstName;
+        this.age = age;
+        this.password = password;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

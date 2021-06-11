@@ -1,17 +1,19 @@
-package home.work10.classes;
+package homework10.classes;
 
-import homework10.annotation.Annotation;
 
-@Annotation.XmlTypeName("Животное")
+import homework10.annotation.XmlName;
+import homework10.annotation.XmlTypeName;
+
+@XmlTypeName("Животное")
 public class Animal {
 
-    @Annotation.XmlName("Кличка")
+    @XmlName("Кличка")
     String name = "Barsik";
 
-    @Annotation.XmlName("Возраст")
+    @XmlName("Возраст")
     int age = 15;
 
-    @Annotation.XmlName("Порода")
+    @XmlName("Порода")
     String breed = "Сиамская";
 
     public void setName(String name) {

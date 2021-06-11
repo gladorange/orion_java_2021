@@ -1,17 +1,18 @@
-package home.work10.classes;
+package homework10.classes;
 
-import homework10.annotation.Annotation;
+import homework10.annotation.XmlName;
+import homework10.annotation.XmlTypeName;
 
-@Annotation.XmlTypeName("Транспорт")
+@XmlTypeName("Транспорт")
 public class Transport {
 
-    @Annotation.XmlName("Модель")
+    @XmlName("Модель")
     String model = "Порш Каен";
 
-    @Annotation.XmlName("Максимальная скорость")
+    @XmlName("Максимальная скорость")
     int maxSpeed = 260;
 
-    @Annotation.XmlName("Спортивная")
+    @XmlName("Спортивная")
     boolean isSports = true;
 
     public void setModel(String model) {
@@ -24,5 +25,14 @@ public class Transport {
 
     public void setSports(boolean sports) {
         isSports = sports;
+    }
+
+    @Override
+    public String toString() {
+        return "Transport{" +
+                "model='" + model + '\'' +
+                ", maxSpeed=" + maxSpeed +
+                ", isSports=" + isSports +
+                '}';
     }
 }

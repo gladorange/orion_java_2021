@@ -1,4 +1,4 @@
-package home.work10;
+package homework10;
 
 import homework10.classes.Animal;
 import homework10.classes.Person;
@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws IllegalAccessException {
-        Person person = new Person();
+    public static void main(String[] args) throws Exception {
+        Person person = new Person("Vasya",12.0,"password");
         Animal animal = new Animal();
         Transport transport = new Transport();
         List<Object> list = new ArrayList<>();

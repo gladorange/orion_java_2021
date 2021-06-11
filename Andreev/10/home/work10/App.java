@@ -1,8 +1,14 @@
-package home.work10;
+package homework10;
 
-import homework10.annotation.Annotation;
+import homework10.annotation.SecretField;
+import homework10.annotation.XmlName;
+import homework10.annotation.XmlTypeName;
+import homework10.classes.Animal;
+import homework10.classes.Person;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +22,7 @@ public class App {
             String className = getClassName(aClass);
             sb.append("<").append(className).append(">\n");
             for (Field declaredField : aClass.getDeclaredFields()) {
-                if (declaredField.isAnnotationPresent(Annotation.SecretField.class)) {
+                if (declaredField.isAnnotationPresent(SecretField.class)) {
                     continue;
                 }
                 final String fieldName = getFieldName(declaredField);
@@ -38,7 +44,7 @@ public class App {
     }
 
     private String getFieldName(Field declaredField) {
-        final Annotation.XmlName annotation = declaredField.getAnnotation(Annotation.XmlName.class);
+        final XmlName annotation = declaredField.getAnnotation(XmlName.class);
 
         if (annotation != null) {
             return annotation.value();
@@ -47,17 +53,16 @@ public class App {
     }
 
     private String getClassName(Class<?> vClass){
-        final Annotation.XmlTypeName annotation = vClass.getAnnotation(Annotation.XmlTypeName.class);
+        final XmlTypeName annotation = vClass.getAnnotation(XmlTypeName.class);
         if (annotation != null) {
             return annotation.value();
         }
         return vClass.getName();
     }
 
-    public String deserialize(String sb, Class<?> vClass)  {
+    public Object deserialize(String sb, Class<?> vClass) throws Exception {
         String[] lines = sb.split("\\n");
-        StringBuilder sBuilder = new StringBuilder();
-        Map<String,String> obj = new HashMap<>();
+        Map<Field,String> map = new HashMap<>();
         String value= "";
         for (int i=0;i<lines.length;i++){
             if (!lines[i].contains(getClassName(vClass))) {
@@ -66,19 +71,36 @@ public class App {
             for (Field field : vClass.getDeclaredFields()) {
                 String fieldName = getFieldName(field);
                 if (lines[i].contains(fieldName)){
-                    obj.put(fieldName,value);
+                    map.put(field,value);
                 }else{
-                    if (!obj.containsKey(fieldName)) {
-                        obj.put(fieldName, "null");
+                    if (!map.containsKey(field)) {
+                        map.put(field, null);
                     }
                 }
             }
         }
-        sBuilder.append(vClass.getSimpleName()).append("{");
-        obj.forEach((key,val) -> sBuilder.append(key).append("=").append(val).append(","));
-        sBuilder.deleteCharAt( sBuilder.length() - 1 );
-        sBuilder.append("}");
-        return sBuilder.toString();
+        Object obj = vClass.newInstance();
+        for (Map.Entry<Field,String> el : map.entrySet()){
+            el.getKey().setAccessible(true);
+            if (int.class.equals(el.getKey().getType())) {
+                el.getKey().setInt(obj, Integer.parseInt(el.getValue()));
+            } else if (long.class.equals(el.getKey().getType())) {
+                el.getKey().setLong(obj, Long.parseLong(el.getValue()));
+            } else if (double.class.equals(el.getKey().getType())) {
+                el.getKey().setDouble(obj, Double.parseDouble(el.getValue()));
+            } else if (float.class.equals(el.getKey().getType())) {
+                el.getKey().setFloat(obj, Float.parseFloat(el.getValue()));
+            } else if (short.class.equals(el.getKey().getType())) {
+                el.getKey().setShort(obj, Short.parseShort(el.getValue()));
+            } else if (byte.class.equals(el.getKey().getType())) {
+                el.getKey().setByte(obj, Byte.parseByte(el.getValue()));
+            } else if (boolean.class.equals(el.getKey().getType())) {
+                el.getKey().setBoolean(obj, Boolean.parseBoolean(el.getValue()));
+            } else {
+                el.getKey().set(obj, el.getValue());
+            }
+        }
+        return obj;
         }
 
 }
