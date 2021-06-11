@@ -56,7 +56,7 @@ class ObjectWorkerWithJSON {
                     .append(fieldName)
                     .append("\"")
                     .append(":");
-            if (declaredField.getType().equals(String.class)) {
+            if (declaredField.getType() == String.class) {
                 objectInStrings
                         .append("\"")
                         .append(declaredField.get(target))
@@ -101,6 +101,8 @@ class ObjectWorkerWithJSON {
                 args.add(Boolean.parseBoolean(objectFields.get(fieldName)));
             } else if (fieldType == int.class) {
                 args.add(Integer.parseInt(objectFields.get(fieldName)));
+            } else if (fieldType == double.class) {
+                args.add(Double.parseDouble(objectFields.get(fieldName)));
             } else if (fieldType == String.class) {
                 args.add(objectFields.get(fieldName));
             }
