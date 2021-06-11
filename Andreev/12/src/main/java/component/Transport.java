@@ -1,8 +1,8 @@
 package component;
 
-import annotation.Annotation;
+import annotation.SimpleComponent;
 
-@Annotation.SimpleComponent
+@SimpleComponent
 public class Transport {
 
     public void saySomething(){

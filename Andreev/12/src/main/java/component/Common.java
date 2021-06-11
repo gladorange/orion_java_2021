@@ -1,20 +1,22 @@
 package component;
 
-import annotation.Annotation;
+import annotation.AfterDependenciesInjected;
+import annotation.AutowireSimpleComponent;
+import annotation.SimpleComponent;
 
-@Annotation.SimpleComponent
+@SimpleComponent
 public class Common {
 
-    @Annotation.AutowireSimpleComponent
+    @AutowireSimpleComponent
     Person person;
 
-    @Annotation.AutowireSimpleComponent
+    @AutowireSimpleComponent
     Animal animal;
 
-    @Annotation.AutowireSimpleComponent
+    @AutowireSimpleComponent
     Transport transport;
 
-    @Annotation.AfterDependenciesInjected
+    @AfterDependenciesInjected
     private void makeNoise() {
         person.saySomething();
         animal.saySomething();

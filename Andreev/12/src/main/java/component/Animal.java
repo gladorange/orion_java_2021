@@ -1,10 +1,8 @@
 package component;
 
-import annotation.Annotation;
+import annotation.SimpleComponent;
 
-import java.time.Period;
-
-@Annotation.SimpleComponent
+@SimpleComponent
 public class Animal {
 
     public void saySomething(){
