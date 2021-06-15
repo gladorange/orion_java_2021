@@ -9,25 +9,33 @@ import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Student {
-    private String nameOfStudent;
+    private String studentName;
     private Set<Lecture> lectures;
 
-    public Student(String nameOfStudent, List<String> listOfLecture) {
-        this.nameOfStudent = nameOfStudent;
+    public Student(String studentName, List<String> listOfLecture) {
+        this.studentName = studentName;
         this.lectures = getLecturesSet(listOfLecture);
     }
 
-    public String getNameOfStudent() {
-        return nameOfStudent;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public Set<Lecture> getListOfLecture() {
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public Set<Lecture> getLectures() {
         return lectures;
+    }
+
+    public void setLectures(Set<Lecture> lectures) {
+        this.lectures = lectures;
     }
 
     @Override
     public String toString() {
-        return nameOfStudent + "," + lectures + "\n";
+        return studentName + " - " + lectures + "\n";
     }
 
     private Set<Lecture> getLecturesSet(List<String> lectures) {
@@ -40,11 +48,11 @@ public class Student {
         return finalListLectures;
     }
 
-    private LocalDate getDateOfLecture(int year, Month month){
+    private LocalDate getDateOfLecture(int year, Month month) {
         return LocalDate.of(year, month, getRandomDayOfMonth(month));
     }
 
-    private int getRandomDayOfMonth(Month month){
-        return ThreadLocalRandom.current().nextInt(1, month.maxLength());
+    private int getRandomDayOfMonth(Month month) {
+        return ThreadLocalRandom.current().nextInt(1, 3);//month.maxLength());
     }
 }

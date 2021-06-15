@@ -1,32 +1,34 @@
 package com.orion.java.hw8.task3;
 
 import java.time.LocalDate;
-import java.time.Month;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Lecture {
-    private String nameOfLecture;
+    private String lectureName;
     private LocalDate dateOfStart;
 
-    public Lecture(String nameOfLecture, LocalDate dateOfStart) {
-        this.nameOfLecture = nameOfLecture;
+    public Lecture(String lectureName, LocalDate dateOfStart) {
+        this.lectureName = lectureName;
         this.dateOfStart = dateOfStart;
     }
 
-    public String getNameOfLecture() {
-        return nameOfLecture;
+    public String getLectureName() {
+        return lectureName;
+    }
+
+    public void setLectureName(String lectureName) {
+        this.lectureName = lectureName;
     }
 
     public LocalDate getDateOfStart() {
         return dateOfStart;
     }
 
+    public void setDateOfStart(LocalDate dateOfStart) {
+        this.dateOfStart = dateOfStart;
+    }
+
     @Override
     public String toString() {
-        return nameOfLecture + " - " + dateOfStart;
+        return lectureName + " - " + dateOfStart;
     }
 }
