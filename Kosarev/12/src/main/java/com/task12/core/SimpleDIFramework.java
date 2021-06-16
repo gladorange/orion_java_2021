@@ -55,26 +55,25 @@ public class SimpleDIFramework {
 
             Set<Field> autowiredFields = ReflectionUtils.getAllFields(component.getClass(),
                     ReflectionUtils.<Field>withAnnotation(AutowireSimpleComponent.class));
-            if (!autowiredFields.isEmpty()) {
-                System.out.println("  Для " + component.toString() + ":");
-                for (Field field : autowiredFields) {
-                    field.setAccessible(true);
-                    Class<?> fieldType = field.getType();
-                    field.set(component, simpleComponents.get(fieldType));
-                    System.out.println("    Полю \"" + field.getName() + "\" присвоено значение \"" + field.get(component) + "\"");
-                }
-            }
-
             Set<Method> afterDIMethods = ReflectionUtils.getAllMethods(component.getClass(),
                     ReflectionUtils.<Method>withAnnotation(AfterDependenciesInjected.class));
-            if (!afterDIMethods.isEmpty()) {
-                for (Method method : afterDIMethods) {
-                    method.setAccessible(true);
-                    method.invoke(component);
-                    System.out.println("    Вызван метод \"" + method.getName() + "\"");
-                }
+
+            if (autowiredFields.isEmpty() && afterDIMethods.isEmpty())
+                continue;
+
+            System.out.println("  Для " + component.toString() + ":");
+            for (Field field : autowiredFields) {
+                field.setAccessible(true);
+                Class<?> fieldType = field.getType();
+                field.set(component, simpleComponents.get(fieldType));
+                System.out.println("    Полю \"" + field.getName() + "\" присвоено значение \"" + field.get(component) + "\"");
             }
 
+            for (Method method : afterDIMethods) {
+                method.setAccessible(true);
+                method.invoke(component);
+                System.out.println("    Вызван метод \"" + method.getName() + "\"");
+            }
             System.out.println();
         }
         System.out.println("Зависимости для пакета \"" + basePackagesToScan + "\" разрешены");
