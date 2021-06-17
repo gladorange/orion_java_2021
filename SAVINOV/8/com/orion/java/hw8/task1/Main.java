@@ -15,11 +15,11 @@ public class Main {
                 new Person("Никита", 30)
         ));
 
-        Comparator<Person> comparatorName = Comparator.comparing((Person person) -> person.getName());
+        Comparator<Person> comparatorName = Comparator.comparing(Person::getName);
         Collections.sort(people,comparatorName);
         System.out.println(people);
 
-        Comparator<Person> comparatorAge = Comparator.comparing((Person person) -> person.getAge());
+        Comparator<Person> comparatorAge = Comparator.comparing(Person::getAge);
         Collections.sort(people, comparatorAge);
         System.out.println(people);
     }

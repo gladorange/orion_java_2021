@@ -14,7 +14,7 @@ public class Student {
 
     public Student(String studentName, List<String> listOfLecture) {
         this.studentName = studentName;
-        this.lectures = getLecturesSet(listOfLecture);
+        this.lectures = generateLectures(listOfLecture);
     }
 
     public String getStudentName() {
@@ -38,7 +38,7 @@ public class Student {
         return studentName + " - " + lectures + "\n";
     }
 
-    private Set<Lecture> getLecturesSet(List<String> lectures) {
+    private Set<Lecture> generateLectures(List<String> lectures) {
         Set<Lecture> finalListLectures = new HashSet<>();
         for (String lecture : lectures) {
             if (new Random().nextBoolean()) {

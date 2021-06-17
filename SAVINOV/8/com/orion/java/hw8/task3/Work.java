@@ -11,13 +11,13 @@ public class Work {
                 .filter(student -> student.getLectures()
                         .stream().anyMatch(lecture -> lecture.getLectureName().equals("матанализ")))
                 .collect(Collectors.toList());
-        getSplit();
+        printLineSeparator();
         System.out.println("Студенты, хоть раз посещавшие матанализ:");
         System.out.println(result);
     }
 
     public static void runTask2(List<Student> students) {
-        getSplit();
+        printLineSeparator();
         System.out.println("Посещаемость по студентам:");
         students.forEach(student -> System.out.println(student.getStudentName() + " - " + student.getLectures().size()));
     }
@@ -28,7 +28,7 @@ public class Work {
                 .collect(Collectors.groupingBy(Lecture::getLectureName, Collectors.counting()));
 
         Long maxValueInMap = Collections.max(mapLecturesCount.values());
-        getSplit();
+        printLineSeparator();
         System.out.println("Наибольшее количество лекций:");
         mapLecturesCount.entrySet()
                 .stream()
@@ -45,7 +45,7 @@ public class Work {
                         .orElse(0L)));
 
         Long maxValueInMap2 = Collections.max(mapMaxLectureVisits.values());
-        getSplit();
+        printLineSeparator();
         System.out.println("Наибольшее количество посещений лекций:");
         mapMaxLectureVisits.entrySet()
                 .stream()
@@ -64,12 +64,12 @@ public class Work {
         Map<String, Long> mapCountLectures = mapStudentListLectures.entrySet().stream()
                 .flatMap(student -> student.getValue().stream())
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        getSplit();
+        printLineSeparator();
         System.out.println("Статистика по курсам:");
         System.out.println(mapCountLectures);
     }
 
-    private static void getSplit(){
+    private static void printLineSeparator(){
         System.out.println();
         System.out.println("   ********");
         System.out.println();
