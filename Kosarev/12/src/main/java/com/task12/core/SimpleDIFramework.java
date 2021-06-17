@@ -23,13 +23,13 @@ public class SimpleDIFramework {
         this.basePackagesToScan = basePackagesToScan;
         try {
             resolveDependencies();
-        } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
+        } catch (InvocationTargetException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
     }
 
     public void resolveDependencies()
-            throws InvocationTargetException, InstantiationException, IllegalAccessException {
+            throws InvocationTargetException, IllegalAccessException, InstantiationException {
         System.out.println("Разрешаю зависимости для пакета \"" + basePackagesToScan + "\":");
         System.out.println();
 
@@ -65,8 +65,13 @@ public class SimpleDIFramework {
             for (Field field : autowiredFields) {
                 field.setAccessible(true);
                 Class<?> fieldType = field.getType();
-                field.set(component, simpleComponents.get(fieldType));
-                System.out.println("    Полю \"" + field.getName() + "\" присвоено значение \"" + field.get(component) + "\"");
+                try {
+                    Object depToInject = simpleComponents.get(fieldType);
+                    field.set(component, depToInject);
+                    System.out.println("    Полю \"" + field.getName() + "\" присвоено значение \"" + field.get(component) + "\"");
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException("Не найдена зависимость для поля \"" + field.getName() + "\"");
+                }
             }
 
             for (Method method : afterDIMethods) {
